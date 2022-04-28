@@ -46,6 +46,13 @@ function getBelowShadow(candle) {
     return candle.close - candle.low;
 }
 
+function getBodyPercent(candle) {
+    // var percent = (candle.open / candle.close);
+    // if (candle.close > candle.open) {
+    //     percent = (candle.close / candle.close);
+    // }
+}
+
 function isDojiCandle(candle) {
     var isDoji = false;
     return isDoji;
