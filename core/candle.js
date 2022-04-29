@@ -20,6 +20,7 @@ function structCandle(candle) {
     };
 }
 
+// Tính biên độ
 function getAmlitude(open,close){
     return ((close*100)/open - 100).toFixed(2);
 }

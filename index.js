@@ -22,7 +22,7 @@ async function main() {
     });
     bPrices.forEach(element => {
         console.log(element);
-        console.log(candle.isDojiCandle(element));
+        //console.log(candle.isDojiCandle(element));
     });
     // console.log(prices);
 }
