@@ -6,23 +6,19 @@ function checkCandle() {
 }
 
 function structCandle(candle) {
-    var open = candle[1];
-    var close = candle[4];
     return {
         timestamp: moment(candle[0]).format(), // thời gian
-        open: open, // giá mở
+        open: candle[1], // giá mở
         highest: candle[2], // giá trần
         low: candle[3], // giá sàn
-        close: close, // giá đóng
+        close: candle[4], // giá đóng
         volume: candle[5], // khối lượng mua
-        amplitude: getAmlitude(open,close), // biên độ
-        change: (open / close) * 100, // biến động
     };
 }
 
 // Tính biên độ
-function getAmlitude(open,close){
-    return ((close*100)/open - 100).toFixed(2);
+function getAmlitude(open, close) {
+    return Math.abs(((close * 100) / open - 100).toFixed(2));
 }
 
 
@@ -51,7 +47,7 @@ function getBelowShadow(candle) {
     return candle.close - candle.low;
 }
 
-function getBodyPercent(candle) {
+function is(candle) {
     // var percent = (candle.open / candle.close);
     // if (candle.close > candle.open) {
     //     percent = (candle.close / candle.close);
@@ -60,14 +56,12 @@ function getBodyPercent(candle) {
 
 function isDojiCandle(candle) {
     var isDoji = false;
+    var amlitude = getAmlitude(candle.open, candle.close);
+    if (amlitude >= constant.Doji.min && amlitude <= constant.Doji.max) {
+        isDoji = true;
+    }
     return isDoji;
 }
 
-
 module.exports.structCandle = structCandle;
-module.exports.isRedCandle = isRedCandle;
-module.exports.isGreenCandle = isGreenCandle;
-module.exports.getBodyCandle = getBodyCandle;
-module.exports.getUpperShadow = getUpperShadow;
-module.exports.getBelowShadow = getBelowShadow;
 module.exports.isDojiCandle = isDojiCandle;

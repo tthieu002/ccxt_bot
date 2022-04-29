@@ -16,13 +16,13 @@ async function printBalance() {
 
 async function main() {
 
-    const prices = await binanceusdm.fetchOHLCV('NEAR/USDT', "15m", undefined, 2);
+    const prices = await binanceusdm.fetchOHLCV('NEAR/USDT', "15m", undefined, 5);
     const bPrices = prices.map(prices => {
         return candle.structCandle(prices);
     });
     bPrices.forEach(element => {
         console.log(element);
-        //console.log(candle.isDojiCandle(element));
+        console.log(candle.isDojiCandle(element));
     });
     // console.log(prices);
 }
