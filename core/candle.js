@@ -15,9 +15,13 @@ function structCandle(candle) {
         low: candle[3], // giá sàn
         close: close, // giá đóng
         volume: candle[5], // khối lượng mua
-        amplitude: (open / close) * 100, // biên độ
+        amplitude: getAmlitude(open,close), // biên độ
         change: (open / close) * 100, // biến động
     };
+}
+
+function getAmlitude(open,close){
+    return ((close*100)/open - 100).toFixed(2);
 }
 
 
