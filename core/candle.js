@@ -54,13 +54,31 @@ function is(candle) {
     // }
 }
 
+//Nến Doji
 function isDojiCandle(candle) {
-    var isDoji = false;
-    var amlitude = getAmlitude(candle.open, candle.close);
-    if (amlitude >= constant.Doji.min && amlitude <= constant.Doji.max) {
-        isDoji = true;
+    try {
+        let isDoji = false;
+        const amlitude = getAmlitude(candle.open, candle.close);
+        if (amlitude >= constant.Doji.min && amlitude <= constant.Doji.max) {
+            isDoji = true;
+        }
+        return isDoji;
+    } catch (error) {
+
     }
-    return isDoji;
+
+}
+
+//Nến bia mộ (Gravestone Doji)
+//Doji hình bia mộ với thân nến nhỏ, bóng nến trên dài và không có bóng nến dưới. Nến này chủ yếu xuất hiện ở đỉnh của xu hướng tăng giá.
+function isGravestoneDoji(candle) {
+    let isGravestoneDoji = false;
+    const upperShadow = getUpperShadow(candle);
+    const belowShadow = getBelowShadow(candle);
+    if (isDojiCandle(candle) && (belowShadow == 0) && (upperShadow > belowShadow)) {
+        isGravestoneDoji = true;
+    }
+    return isGravestoneDoji;
 }
 
 module.exports.structCandle = structCandle;
